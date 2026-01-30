@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import "./App.css";
+import PageTemplate from "./components/PageTemplate";
+import Settings from './components/Settings'
 
 function App() {
     const [message, setMessage] = useState("Loading...");
@@ -15,25 +17,35 @@ function App() {
 
     return (
         <Router>
-            <div className="App">
-                <nav>
-                    <Link to="/">Home</Link> |{" "}
-                    <Link to="/dashboard">Dashboard</Link>
-                </nav>
-
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <header className="App-header">
-                                <h1>Canvas API Student Dashboard</h1>
-                                <p>{message}</p>
-                            </header>
-                        }
-                    />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                </Routes>
-            </div>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <header className="App-header">
+                            <h1 className="bg-blue-500 p-4 m-4 ">
+                                Canvas API Student Dashboard
+                            </h1>
+                            <p>{message}</p>
+                        </header>
+                    }
+                />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <PageTemplate>
+                            <Dashboard />
+                        </PageTemplate>
+                    }
+                />
+                        <Route
+                    path="/settings"
+                    element={
+                        <PageTemplate>
+                            <Settings />
+                        </PageTemplate>
+                    }
+                />
+            </Routes>
         </Router>
     );
 }

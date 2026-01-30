@@ -18,6 +18,9 @@
     "concurrently": "^8.2.2"
   },
   "dependencies": {
-    "react-router-dom": "^7.13.0"
+    "@tailwindcss/vite": "^4.1.18",
+    "lucide-react": "^0.563.0",
+    "react-router-dom": "^7.13.0",
+    "tailwindcss": "^4.1.18"
   }
 }
