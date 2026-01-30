@@ -1,20 +1,34 @@
-const express = require('express');
-const cors = require('cors');
 require('dotenv').config();
+const app = require('./src/app');
+const config = require('./src/config');
+const logger = require('./src/config/logger.config');
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Routes
-app.get('/api', (req, res) => {
-  res.json({ message: 'Welcome to the Canvas API Student Dashboard backend!' });
-});
+const PORT = config.port;
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = app.listen(PORT, () => {
+  logger.info(`Server is running on port ${PORT}`);
+  logger.info(`Environment: ${config.env}`);
+  logger.info(`Canvas API: ${config.canvas.baseURL}`);
+  logger.info(`Cache enabled: ${config.cache.enabled}`);
+  logger.info(`Read-only mode: ${config.security.readOnlyMode}`);
 });
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM signal received: closing HTTP server');
+  server.close(() => {
+    logger.info('HTTP server closed');
+    process.exit(0);
+  });
+});
+
+process.on('SIGINT', () => {
+  logger.info('SIGINT signal received: closing HTTP server');
+  server.close(() => {
+    logger.info('HTTP server closed');
+    process.exit(0);
+  });
+});
+
+module.exports = server;
