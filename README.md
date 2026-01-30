@@ -101,27 +101,6 @@ npm start
 - `npm run build` - Build the frontend for production
 - `npm start` - Start the backend in production mode
 
-## API Endpoints
-
-- `GET /api` - Welcome message
-- `GET /api/health` - Health check endpoint
-
-## Technologies Used
-
-### Frontend
-- React 18
-- Vite
-- CSS3
-
-### Backend
-- Express
-- CORS
-- dotenv
-
-### Development
-- Nodemon (backend hot reload)
-- Concurrently (run multiple commands)
-
 ## License
 
 MIT
