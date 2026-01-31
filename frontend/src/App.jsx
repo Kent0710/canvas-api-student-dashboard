@@ -5,10 +5,10 @@ function App() {
   const [message, setMessage] = useState('Loading...')
 
   useEffect(() => {
-    // Fetch message from backend
-    fetch('/api')
+    // Fetch health check from backend
+    fetch('/health')
       .then(res => res.json())
-      .then(data => setMessage(data.message))
+      .then(data => setMessage(`Backend connected! Status: ${data.data.status}`))
       .catch(err => setMessage('Error connecting to backend'))
   }, [])
 
